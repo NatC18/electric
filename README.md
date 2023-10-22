@@ -53,7 +53,7 @@ Te invitamos a que juegues con los parámetros, crear más celdas, variar los co
 
 ## ¿Cómo seguir?
 
-La idea es poder perfeccionar aún más este modelo, ver como la dirección y magnitud del campo varían cuando el electrón se mueve por este, ver la influencia del campo magnético de una manera isual y mucho más.
+La idea es poder perfeccionar aún más este modelo, como ver la influencia del campo magnético de una manera visual, considerar los efectos de varaiciones temporales del campo electrico que dan nacimiento a las ondas Electromagneticas 💡 y mucho mas.
 
 Motiva mucho la idea de compatibilizar la ciencia y el arte, para hacerlo más ameno e interactivo al momento de aprenderlo, simplemente para pasar un buen rato.
 
