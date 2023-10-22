@@ -19,6 +19,7 @@ float noise_scale = 0.1;
 int[][] charges;
 
 Module[] mods;
+Module[] mods_percibido;
 
 int q = -5;
 int n = int(random(5, 15));
@@ -58,6 +59,7 @@ void setup() {
   noFill();
   
   mods = new Module[count];
+  mods_percibido = new Module[count];
   
   int index = 0;
   
@@ -68,7 +70,6 @@ void setup() {
   }
 
  
-  
   
   for (int row = 0; row < n_height; row++) {
     for (int col = 0; col < n_width; col++) {
@@ -90,14 +91,14 @@ void setup() {
       float x_coord = k * force[0] / magnitude;
       float y_coord = k * force[1] / magnitude;
       //print(x_coord, y_coord, "\n");
-
-      mods[index++] = new Module(x, y, lineLength, magnitude, x_coord, y_coord, nn, cell_size, br, bg, bb);
+      mods_percibido[index] = new Module(x, y, lineLength, magnitude, x_coord, y_coord, nn, cell_size, br, bg, bb);
+      mods[index] = new Module(x, y, lineLength, magnitude, x_coord, y_coord, nn, cell_size, br, bg, bb);
+      index = index + 1;
       //print(b, "\n");
       //mods[index++] = new Module(x, y, lineLength);
       
     }
   }
-  
 }
 
 void keyPressed() {
@@ -113,6 +114,33 @@ void draw() {
   background(br * 0.3, bg * 0.3, bb * 0.3);
   strokeCap(SQUARE);
   
+  int[] electron = { xelectron,yelectron,q };
+  for (int row = 0; row < n_height; row++) {
+    for (int col = 0; col < n_width; col++) {
+      int x = col * cell_size;
+      int y = row * cell_size;
+      float k = 1000;
+      int indice = row * n_width + col;
+      float[] force_electron = force(x,y,electron);
+      float[] force = { 0,0 };
+      force[0] = mods_percibido[indice].v_x * mods_percibido[indice].magnitude/k + force_electron[0]*force_electron[2];
+      force[1] = mods_percibido[indice].v_y * mods_percibido[indice].magnitude/k + force_electron[1]*force_electron[2];
+      float magnitude = k * (float) Math.sqrt(force[0] * force[0] + force[1] * force[1]);
+      if (min_magnitude > magnitude) {
+        min_magnitude = magnitude;
+      }
+      if (max_magnitude < magnitude) {
+        max_magnitude = magnitude;
+      }
+      // print(magnitude, "\n");
+      float x_coord = k * force[0] / magnitude;
+      float y_coord = k * force[1] / magnitude;
+
+      mods[indice].v_x = x_coord;
+      mods[indice].v_y = y_coord;
+      mods[indice].magnitude = magnitude;
+    }
+  }
   for (Module mod : mods) {
     mod.display(min_magnitude, max_magnitude);
     mod.update();
@@ -159,8 +187,8 @@ void draw() {
    
    int indice = i * n_width + j;
    
-   force_campox = mods[indice].v_x * mods[indice].magnitude * q;
-   force_campoy = mods[indice].v_y * mods[indice].magnitude * q;
+   force_campox = mods_percibido[indice].v_x * mods_percibido[indice].magnitude * q;
+   force_campoy = mods_percibido[indice].v_y * mods_percibido[indice].magnitude * q;
 
 
 
