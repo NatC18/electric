@@ -34,6 +34,7 @@ int yelectron = window_height / 2;
 
 float electron_speed_x = 0;
 float electron_speed_y = 0;
+float max_electron_force = 10;
 
 float electron_force = 10;
 float electron_mass = 1;
@@ -189,7 +190,19 @@ void draw() {
    
    force_campox = mods_percibido[indice].v_x * mods_percibido[indice].magnitude * q;
    force_campoy = mods_percibido[indice].v_y * mods_percibido[indice].magnitude * q;
-
+    
+   if (force_campox > max_electron_force) {
+      force_campox = max_electron_force;
+    }
+    else if (force_campox < -max_electron_force){
+      force_campox = -max_electron_force;
+    }
+   if (force_campoy > max_electron_force) {
+      force_campoy = max_electron_force;
+    }
+    else if (force_campoy < -max_electron_force){
+      force_campoy = -max_electron_force;
+    }
 
 
      
@@ -198,6 +211,7 @@ void draw() {
 
     electron_speed_x += forcex_neta/electron_mass;
     electron_speed_y += forcey_neta/electron_mass;
+
 
     xelectron += electron_speed_x;
     yelectron += electron_speed_y;
