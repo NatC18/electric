@@ -4,6 +4,10 @@ float spacing = 30;  // Spacing between lines
 float lineLength = 20;  // Length of each line
 float rotationSpeed = 0.02;  // Speed of rotation
 
+int debounceDelay = 200; // Adjust this value as needed
+int lastKeyPressTime = 0;
+boolean vKeyPressedFlag = false;
+
 int window_height = 600;
 int window_width = 1200;
 
@@ -21,6 +25,7 @@ int[][] charges;
 Module[] mods;
 Module[] mods_percibido;
 
+boolean visualizar = false;
 int q = -5;
 int n = int(random(5, 15));
 int[][] listCharges = new int[n][3];
@@ -34,7 +39,7 @@ int yelectron = window_height / 2;
 
 float electron_speed_x = 0;
 float electron_speed_y = 0;
-float max_electron_force = 10;
+float max_electron_force = 8;
 
 float electron_force = 10;
 float electron_mass = 1;
@@ -104,6 +109,13 @@ void setup() {
 
 void keyPressed() {
   keys[key] = true;
+  if (key == 'v' || key == 'V') {
+    if (!vKeyPressedFlag) {
+      // Set the flag and record the time of the "V" key press
+      vKeyPressedFlag = true;
+      lastKeyPressTime = millis();
+    }
+  }
 }
 
 void keyReleased() {
@@ -114,7 +126,13 @@ void draw() {
   //background(29, 87, 89);
   background(br * 0.3, bg * 0.3, bb * 0.3);
   strokeCap(SQUARE);
-  
+  if (vKeyPressedFlag) {
+    if (millis() - lastKeyPressTime >= debounceDelay) {
+      visualizar = !visualizar;
+      vKeyPressedFlag = false;
+    }
+  }
+
   int[] electron = { xelectron,yelectron,q };
   for (int row = 0; row < n_height; row++) {
     for (int col = 0; col < n_width; col++) {
@@ -124,6 +142,7 @@ void draw() {
       int indice = row * n_width + col;
       float[] force_electron = force(x,y,electron);
       float[] force = { 0,0 };
+      if (visualizar) {
       force[0] = mods_percibido[indice].v_x * mods_percibido[indice].magnitude/k + force_electron[0]*force_electron[2];
       force[1] = mods_percibido[indice].v_y * mods_percibido[indice].magnitude/k + force_electron[1]*force_electron[2];
       float magnitude = k * (float) Math.sqrt(force[0] * force[0] + force[1] * force[1]);
@@ -136,10 +155,16 @@ void draw() {
       // print(magnitude, "\n");
       float x_coord = k * force[0] / magnitude;
       float y_coord = k * force[1] / magnitude;
-
+      
       mods[indice].v_x = x_coord;
       mods[indice].v_y = y_coord;
       mods[indice].magnitude = magnitude;
+      }
+      else {
+      mods[indice].v_x = mods_percibido[indice].v_x;
+      mods[indice].v_y = mods_percibido[indice].v_y;
+      mods[indice].magnitude = mods_percibido[indice].magnitude;
+      }
     }
   }
   for (Module mod : mods) {
