@@ -75,19 +75,19 @@ class Module {
 
   // Update values with each frame
   void update(){
-    //angle = (float) Math.atan2(v_x, v_y);
-    //og_angle = (float) Math.atan2(v_x, v_y);
-    //float large = log(magnitude / min_magnitude);
+    angle = (float) Math.atan2(v_x, v_y);
+    og_angle = (float) Math.atan2(v_x, v_y);
+    float large = log(magnitude / min_magnitude);
     
-    //stroke(r + varr, g + varg, b + varb);
-    //strokeWeight(large * 0.5);
+    stroke(r + varr, g + varg, b + varb);
+    strokeWeight(large * 0.5);
     
-    //pushMatrix();
-    //translate(x, y);
-    //rotate(angle);
-    //scale(scaling);
-    //line(-large / 2 * cell_size * 0.2 + xOffset, 0, large / 2 * cell_size * 0.2 + yOffset, 0);
-    //popMatrix();
+    pushMatrix();
+    translate(x, y);
+    rotate(angle);
+    scale(scaling);
+    line(-large / 2 * cell_size * 0.2 + xOffset, 0, large / 2 * cell_size * 0.2 + yOffset, 0);
+    popMatrix();
       
     scaling += 0.01 * scaling_pond;
     if (scaling < 0.1) {

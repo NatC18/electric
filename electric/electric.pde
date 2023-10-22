@@ -196,7 +196,7 @@ void draw() {
   
   // Draw the electron
   fill(230, 23, 80);
-  ellipse(xelectron, yelectron, q * 1.1, q * 1.1);
+  ellipse(xelectron, yelectron, abs(q) * 1.1, abs(q) * 1.1);
   
   // Force on the electron by moving the keys
    if (keys['w'] || keys['W']) {
