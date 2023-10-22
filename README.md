@@ -18,11 +18,13 @@ El electrón será situado en el plano y se moverá según la fuerza que el plan
 
 Es posible notar que este sigue las lineas de flujo, en general acercándose rápidamente a ciertas secciones (donde habrían protones) 
 ![](https://github.com/NatC18/electric/blob/main/Assets/proton.gif)
+
 > _Figura 1: electrón acercándose a un punto_
 
 y alejándose de otras (donde habrían electrones) casi impidiendo pasar por ciertos puntos.
 ![](https://github.com/NatC18/electric/blob/main/Assets/electron.gif)
-> _Figura 2: electrón din poder acercarse al punto_
+
+> _Figura 2: electrón sin poder acercarse al punto_
 
 
 ### _Random_ 🎲
@@ -37,7 +39,7 @@ La cantidad de cargas situadas en el plano, las posición de estas, la gama de c
 
 2. Clona este repositorio en una carpeta de tu computador.
 
-3. Abre processing y dirígete a la carpeta del repositorio, tienes que abrir el archivo `practica.pde`y se te debiera abrir la interfaz de processing con los 2 archivos `.pde`.
+3. Abre processing y dirígete a la carpeta del repositorio, tienes que abrir el archivo `electric.pde`y se te debiera abrir la interfaz de processing con los 2 archivos `.pde`.
 
 4. Presiona el símbolo play y utiliza las teclas para aplicar la fuerza sobre el electrón y ver como esta influye en su comportamiento.
 
