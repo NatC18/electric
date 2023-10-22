@@ -49,7 +49,7 @@ La cantidad de cargas situadas en el plano, las posición de estas, la gama de c
 
 4. Presiona el símbolo play y utiliza las teclas para aplicar la fuerza sobre el electrón y ver como esta influye en su comportamiento.
 
-Es posible ver un _deploy_ del proyecto [aquí](https://openprocessing.org/sketch/2054946) (por algún motivo para que el teclado funcione se debe presionar con el mouse en cualquier lugar de la pantalla).
+Es posible ver un _deploy_ del proyecto [aquí](https://openprocessing.org/sketch/2054946) (por algún motivo para que el teclado funcione se debe presionar con el mouse en cualquier lugar de la pantalla). No es exactamente igual a los archivos subidos debido a que no compatibilizó el cambio en las fuerzas, por lo que recomendamos descargarlo igualmente :)
 
 Te invitamos a que juegues con los parámetros, crear más celdas, variar los colores, ¡se puede hacer de todo!
 

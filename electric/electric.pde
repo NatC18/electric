@@ -85,8 +85,8 @@ void setup() {
       float y = row * cell_size;
       
       float k = 1000;
-      float[] force = totalForce(int(x), int(y)); //Direction of the electric field in that point
-      float magnitude = k * (float) Math.sqrt(force[0] * force[0] + force[1] * force[1]); //Magnitude of the electric field in that point
+      float[] forces = totalForce(int(x), int(y)); //Direction of the electric field in that point
+      float magnitude = k * (float) Math.sqrt(forces[0] * forces[0] + forces[1] * forces[1]); //Magnitude of the electric field in that point
       
       // Check if its min magnitude
       if (min_magnitude > magnitude) {
@@ -94,8 +94,8 @@ void setup() {
       }
       
       // Unitary vector of electric field direction
-      float x_coord = k * force[0] / magnitude;
-      float y_coord = k * force[1] / magnitude;
+      float x_coord = k * forces[0] / magnitude;
+      float y_coord = k * forces[1] / magnitude;
       
       // Create instances of each point
       mods_percibido[index] = new Module(x, y, magnitude, x_coord, y_coord, cell_size, br, bg, bb);
@@ -148,19 +148,19 @@ void draw() {
       
       // Get force of the electron and the field in each point
       float[] force_electron = force(x,y,electron);
-      float[] force = { 0,0 };
+      float[] forcess = { 0,0 };
       if (visualizar) {
-        force[0] = mods_percibido[indice].v_x * mods_percibido[indice].magnitude/k + force_electron[0]*force_electron[2];
-        force[1] = mods_percibido[indice].v_y * mods_percibido[indice].magnitude/k + force_electron[1]*force_electron[2];
-        float magnitude = k * (float) Math.sqrt(force[0] * force[0] + force[1] * force[1]);
+        forcess[0] = mods_percibido[indice].v_x * mods_percibido[indice].magnitude/k + force_electron[0]*force_electron[2];
+        forcess[1] = mods_percibido[indice].v_y * mods_percibido[indice].magnitude/k + force_electron[1]*force_electron[2];
+        float magnitude = k * (float) Math.sqrt(forcess[0] * forcess[0] + forcess[1] * forcess[1]);
         
         if (min_magnitude > magnitude) {
           min_magnitude = magnitude;
         }
         
         // Force vector
-        float x_coord = k * force[0] / magnitude;
-        float y_coord = k * force[1] / magnitude;
+        float x_coord = k * forcess[0] / magnitude;
+        float y_coord = k * forcess[1] / magnitude;
         
         mods[indice].v_x = x_coord;
         mods[indice].v_y = y_coord;

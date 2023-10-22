@@ -21,7 +21,7 @@ class Module {
   float scaling_pond;
   float noise_scale;
   float noise_pond;
-  
+   
   
   Module(float xTemp, float yTemp, float magnitudeTemp, float v_xTemp, float v_yTemp, int cell_sizeTemp, float br, float bg, float bb){
     x = xTemp;
