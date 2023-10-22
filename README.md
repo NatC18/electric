@@ -33,6 +33,10 @@ La utilización de _Random_ es esencial en el programa, permitiendo que cada esc
 
 La cantidad de cargas situadas en el plano, las posición de estas, la gama de colores y la misma distribución de estos, el tamaño de las lineas en un inicio, si estas parten creciendo o decreciendo, y mucho más, está en todas partes.
 
+![](https://github.com/NatC18/electric/blob/main/Assets/proton.gif)
+
+> Figura 3: distintas versiones del programa.
+
 ## Ejecución
 
 1. Para ejecutar el programa en tu computador, debes [descargar](https://processing.org/download) la versión 4.3 de Processing.
@@ -49,7 +53,7 @@ Te invitamos a que juegues con los parámetros, crear más celdas, variar los co
 
 ## ¿Cómo seguir?
 
-La idea es poder perfecciionar aún más este modelo, ver como la dirección y magnitud del campo varían cuando el electrón se mueve por este, ver la influencia del campo magnético de una manera isual y mucho más.
+La idea es poder perfeccionar aún más este modelo, ver como la dirección y magnitud del campo varían cuando el electrón se mueve por este, ver la influencia del campo magnético de una manera isual y mucho más.
 
 Motiva mucho la idea de compatibilizar la ciencia y el arte, para hacerlo más ameno e interactivo al momento de aprenderlo, simplemente para pasar un buen rato.
 
