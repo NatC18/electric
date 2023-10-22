@@ -1,33 +1,29 @@
-int numRows = 5;  // Number of rows
-int numCols = 5;  // Number of columns
-float spacing = 30;  // Spacing between lines
 float lineLength = 20;  // Length of each line
 float rotationSpeed = 0.02;  // Speed of rotation
+float noise_scale = 0.1; // The scale of the noise
 
 int debounceDelay = 200; // Adjust this value as needed
 int lastKeyPressTime = 0;
 boolean vKeyPressedFlag = false;
 
-int window_height = 600;
-int window_width = 1200;
+int window_height = 600; // Window height
+int window_width = 1200; // Window width
+int cell_size = 15; // Adjust cell_size
+int n_height = window_height / cell_size; // Amount of lines in the x axis
+int n_width = window_width / cell_size; // Amount of lines in the y axis
+int count = n_height * n_width; // Amount of points we view
 
-int cell_size = 15;
+int[][] charges; // Array of random charges
+int q = int(random(-10, -3)); // Value of the electron charge
+boolean visualizar = false; // Boolean that defines if the electron is going to affect the electric field or not
 
-int n_height = window_height / cell_size;
-int n_width = window_width / cell_size;
+Module[] mods; // Array of class of type `Module` that saves each line
 
-int count = n_height * n_width;
+Module[] mods_percibido; // Array of class of type `Module` with the impact f the electron in the electric field
 
-float noise_scale = 0.1;
 
-int[][] charges;
-
-Module[] mods;
-Module[] mods_percibido;
-
-boolean visualizar = false;
-int q = -5;
 int n = int(random(5, 15));
+
 int[][] listCharges = new int[n][3];
 
   
@@ -108,7 +104,7 @@ void setup() {
 }
 
 void keyPressed() {
-  keys[key] = true;
+  keys[keyCode] = true;
   if (key == 'v' || key == 'V') {
     if (!vKeyPressedFlag) {
       // Set the flag and record the time of the "V" key press
@@ -119,7 +115,7 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  keys[key] = false;
+  keys[keyCode] = false;
 }
 
 void draw() {
@@ -172,10 +168,20 @@ void draw() {
     mod.update();
     mod.move(xelectron, yelectron);
   }
+  noStroke();
+  for (int i = 0; i < n; i ++) {
+    if (listCharges[i][2] < 0) {
+      fill(230, 23, 80);
+    } else {
+      fill(230, 184, 100);
+    }
+    ellipse(listCharges[i][0], listCharges[i][1], abs(listCharges[i][2]) * 1.1, abs(listCharges[i][2]) * 1.1);
+    
+  }
   
   fill(230, 23, 80);
-  noStroke();
-  ellipse(xelectron, yelectron, 10, 10);
+  
+  ellipse(xelectron, yelectron, q * 1.1, q * 1.1);
    if (keys['w'] || keys['W']) {
      forcey = -electron_force; // Move up
    }
