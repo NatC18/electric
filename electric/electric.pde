@@ -110,7 +110,7 @@ void keyReleased() {
 
 void draw() {
   //background(29, 87, 89);
-  background(8, 49, 56);
+  background(br * 0.3, bg * 0.3, bb * 0.3);
   strokeCap(SQUARE);
   
   for (Module mod : mods) {

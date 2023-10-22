@@ -20,6 +20,8 @@ class Module {
   float varb;
   float scaling;
   float scaling_pond;
+  float noise_scale;
+  float noise_pond;
   
   
   Module(float xTemp, float yTemp, float lineLengthTemp, float magnitudeTemp, float v_xTemp, float v_yTemp, float nTemp, int cell_sizeTemp, float br, float bg, float bb){
@@ -30,7 +32,6 @@ class Module {
     magnitude = magnitudeTemp;
     v_x = v_xTemp;
     v_y = v_yTemp;
-    n = nTemp;
     //xOffset = cell_sizeTemp * random(-0.5, 0.5);
     //yOffset = cell_sizeTemp * random(-0.5, 0.5);
     angle = (float) Math.atan2(v_x, v_y);
@@ -69,6 +70,14 @@ class Module {
     if (angle < 0) {
         angle += 2 * Math.PI;
     }
+    noise_scale = 0.05;
+    n = noise(magnitude);
+    if (n < 0.5) {
+      noise_pond = 1;
+    } else {
+      noise_pond = -1;
+    }
+    
   }
   
 
@@ -89,6 +98,25 @@ class Module {
     }
     else if (scaling > 3) {
       scaling_pond *= -1;
+    }
+
+    r += n * noise_pond;
+    g += n * noise_pond;
+    b += n * noise_pond;
+    if ( r > br + 30) {
+      noise_pond *= -1;
+    }else if ( g > bg + 30) {
+      noise_pond *= -1;
+    }else if ( b > bb + 30) {
+      noise_pond *= -1;
+    }
+    
+    if ( r < br - 30) {
+      noise_pond *= -1;
+    }else if ( g < bg - 30) {
+      noise_pond *= -1;
+    }else if ( b < bb - 30) {
+      noise_pond *= -1;
     }
   }
    
