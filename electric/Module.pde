@@ -22,7 +22,7 @@ class Module {
   float scaling_pond;
   
   
-  Module(float xTemp, float yTemp, float lineLengthTemp, float magnitudeTemp, float v_xTemp, float v_yTemp, float nTemp, int cell_sizeTemp, float base){
+  Module(float xTemp, float yTemp, float lineLengthTemp, float magnitudeTemp, float v_xTemp, float v_yTemp, float nTemp, int cell_sizeTemp, float br, float bg, float bb){
   //Module(float xTemp, float yTemp, float lineLengthTemp){
     x = xTemp;
     y = yTemp;
@@ -50,9 +50,9 @@ class Module {
     //r = 23 * n + 20 * n;
     //g = 230 * n + 20 * n;
     //b = 170 * n + 20 * n;
-    r = base + 23 * n;
-    g = base + 230 * n;
-    b = base + 170 * n;
+    r = br + 170 * n;
+    g = bg + 230 * n;
+    b = bb + 170 * n;
     //print(r, g, b, n, "\n");
     varr = 0;
     varg = 0;

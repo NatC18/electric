@@ -47,6 +47,10 @@ float force_campoy = 0;
 
 boolean[] keys = new boolean[128];
 
+float br = random(0.0, 100.0);
+float bg = random(0.0, 100.0);
+float bb = random(0.0, 100.0);
+
 void setup() {
   size(1200, 600);
   background(255);
@@ -86,9 +90,9 @@ void setup() {
       float x_coord = k * force[0] / magnitude;
       float y_coord = k * force[1] / magnitude;
       //print(x_coord, y_coord, "\n");
-      float b = random(-80.0, 100.0);
-      mods[index++] = new Module(x, y, lineLength, magnitude, x_coord, y_coord, nn, cell_size, b);
-      print(b, "\n");
+
+      mods[index++] = new Module(x, y, lineLength, magnitude, x_coord, y_coord, nn, cell_size, br, bg, bb);
+      //print(b, "\n");
       //mods[index++] = new Module(x, y, lineLength);
       
     }
