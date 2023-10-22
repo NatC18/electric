@@ -1,7 +1,6 @@
 class Module {
   float x;
   float y;
-  float lineLength;
   float angle;
   float magnitude;
   float v_x;
@@ -24,16 +23,12 @@ class Module {
   float noise_pond;
   
   
-  Module(float xTemp, float yTemp, float lineLengthTemp, float magnitudeTemp, float v_xTemp, float v_yTemp, float nTemp, int cell_sizeTemp, float br, float bg, float bb){
-  //Module(float xTemp, float yTemp, float lineLengthTemp){
+  Module(float xTemp, float yTemp, float magnitudeTemp, float v_xTemp, float v_yTemp, int cell_sizeTemp, float br, float bg, float bb){
     x = xTemp;
     y = yTemp;
-    lineLength = lineLengthTemp;
     magnitude = magnitudeTemp;
     v_x = v_xTemp;
     v_y = v_yTemp;
-    //xOffset = cell_sizeTemp * random(-0.5, 0.5);
-    //yOffset = cell_sizeTemp * random(-0.5, 0.5);
     angle = (float) Math.atan2(v_x, v_y);
     og_angle = (float) Math.atan2(v_x, v_y);
     cell_size = cell_sizeTemp;
@@ -42,34 +37,32 @@ class Module {
     } else {
       pond = 1;
     }
-    //r = 230 * random(1.8, 1.2) + 20 * random(0.0, 1.0);
-    //g = 200 * random(0.8, 1.2) + 20 * random(0.0, 1.0);
-    //b = 70 * random(0.8, 1.2) + 20 * random(0.0, 1.0);
-    //r = 23 * random(1.8, 1.2) + 20 * random(0.0, 1.0);
-    //g = 230 * random(0.8, 1.2) + 20 * random(0.0, 1.0);
-    //b = 170 * random(0.8, 1.2) + 20 * random(0.0, 1.0);
-    //r = 23 * n + 20 * n;
-    //g = 230 * n + 20 * n;
-    //b = 170 * n + 20 * n;
+    
+    // Base colors for displaying
     r = br + 170 * n;
     g = bg + 230 * n;
     b = bb + 170 * n;
-    //print(r, g, b, n, "\n");
+
+    // Variable amount for te base rgb params
     varr = 0;
     varg = 0;
     varb = 0;
+    
+    // Initial scale size of a line
     scaling = random(0.1, 3.0);
+    
+    // Get if the scaling is going to grow or shrink
     if (random(0.0, 1.0) < 0.5) {
       scaling_pond = 1;
     } else {
       scaling_pond = -1;
     }
     
-
-// Ensure the angle is in the range [0, 2π] (0 to 360 degrees)
     if (angle < 0) {
         angle += 2 * Math.PI;
     }
+    
+    // Noise vor color change
     noise_scale = 0.05;
     n = noise(magnitude);
     if (n < 0.5) {
@@ -79,35 +72,23 @@ class Module {
     }
     
   }
-  
 
-  
+  // Update values with each frame
   void update(){
     angle = (float) Math.atan2(v_x, v_y);
     og_angle = (float) Math.atan2(v_x, v_y);
-      float large = log(magnitude / min_magnitude);
+    float large = log(magnitude / min_magnitude);
+    
+    stroke(r + varr, g + varg, b + varb);
+    strokeWeight(large * 0.5);
+    
+    pushMatrix();
+    translate(x, y);
+    rotate(angle);
+    scale(scaling);
+    line(-large / 2 * cell_size * 0.2 + xOffset, 0, large / 2 * cell_size * 0.2 + yOffset, 0);
+    popMatrix();
       
-      //print(large, "\n");
-      stroke(r + varr, g + varg, b + varb);
-      strokeWeight(large * 0.5);
-      
-      pushMatrix();
-      translate(x, y);
-      rotate(angle);
-      scale(scaling);
-      //print(scaling, "\n");
-      line(-large / 2 * cell_size * 0.2 + xOffset, 0, large / 2 * cell_size * 0.2 + yOffset, 0);
-      popMatrix();
-      
-    //angle += 0.003 * pond;
-    if ( angle > og_angle + 0.1) {
-     // pond *= -1;
-    } else if ( angle < og_angle - 0.1) {
-     // pond *= -1;
-    }
-    //r += random(-3.0, 3.0);
-    //g += random(-3.0, 3.0);
-    //b += random(-3.0, 3.0);
     scaling += 0.01 * scaling_pond;
     if (scaling < 0.1) {
       scaling_pond *= -1;
@@ -116,9 +97,12 @@ class Module {
       scaling_pond *= -1;
     }
 
+    // Change colors per frame with noise
     r += n * noise_pond;
     g += n * noise_pond;
     b += n * noise_pond;
+    
+    // Get max values of the color change
     if ( r > br + 30) {
       noise_pond *= -1;
     }else if ( g > bg + 30) {
@@ -127,6 +111,7 @@ class Module {
       noise_pond *= -1;
     }
     
+    // Get min values of the color change
     if ( r < br - 30) {
       noise_pond *= -1;
     }else if ( g < bg - 30) {
@@ -136,26 +121,29 @@ class Module {
     }
   }
    
-  void display(float min_magnitude, float max_magnitude){
+  void display(float min_magnitude){
     
-      float large = log(magnitude / min_magnitude);
-      //print(large, "\n");
-      stroke(r + varr, g + varg, b + varb);
-      strokeWeight(large * 0.5);
-      
-      pushMatrix();
-      translate(x, y);
-      rotate(angle);
-      scale(scaling);
-      //print(scaling, "\n");
-      line(-large / 2 * cell_size * 0.2 + xOffset, 0, large / 2 * cell_size * 0.2 + yOffset, 0);
-      popMatrix();
+    // Scale field magnitude
+    float large = log(magnitude / min_magnitude);
+    stroke(r + varr, g + varg, b + varb);
+    strokeWeight(large * 0.5);
+    
+    pushMatrix();
+    translate(x, y);
+    rotate(angle);
+    scale(scaling);
+    line(-large / 2 * cell_size * 0.2 + xOffset, 0, large / 2 * cell_size * 0.2 + yOffset, 0);
+    popMatrix();
   }
+  
+  // Get distance between electron and the point
   float distance(float x1, float y1, float x2, float y2) {
     float dx = x2 - x1;
     float dy = y2 - y1;
     return sqrt(dx*dx + dy*dy);
   }
+  
+  // Impact of the electron moving
   void move(float xelectron, float yelectron) {
     float d = distance(x, y, xelectron, yelectron);
     if (d < 60){
@@ -167,8 +155,6 @@ class Module {
       varr = 0;
       varg = 0;
       varb = 0;
-    }
-    
-  
+    }  
   }
 }
