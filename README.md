@@ -33,7 +33,7 @@ La utilización de _Random_ es esencial en el programa, permitiendo que cada esc
 
 La cantidad de cargas situadas en el plano, las posición de estas, la gama de colores y la misma distribución de estos, el tamaño de las lineas en un inicio, si estas parten creciendo o decreciendo, y mucho más, está en todas partes.
 
-![](https://github.com/NatC18/electric/blob/main/Assets/proton.gif)
+![](https://github.com/NatC18/electric/blob/main/Assets/random.gif)
 
 > Figura 3: distintas versiones del programa.
 
