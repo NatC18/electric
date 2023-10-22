@@ -17,7 +17,7 @@ A pesar de utilizar varios supuestosfísicos, se busca basarse de la forma más 
 El electrón será situado en el plano y se moverá según la fuerza que el plano ejerce sobre este. Sin embaro, al presionar alguna de las teclas `A`, `W`, `S` O `D` se simulará una fuerza de 10 Newtons en la dirección seleccionada, pudiendo afectar así como el electrón se mueve dentro del campo.
 
 Es posible notar que este sigue las lineas de flujo, en general acercándose rápidamente a ciertas secciones (donde habrían protones) 
-![](Assets/proton.gif)
+![](https://github.com/NatC18/electric/blob/master/Assets/proton.gif)
 > _Figura 1: electrón acercándose a un punto_
 
 y alejándose de otras (donde habrían electrones) casi impidiendo pasar por ciertos puntos.
