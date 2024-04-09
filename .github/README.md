@@ -1,1 +1,1 @@
-../hello.md
+../docs/projectname/some-README.md
